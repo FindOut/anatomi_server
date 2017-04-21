@@ -1,4 +1,4 @@
-# anatomi_server
+# anatomy_server
 Fristående server för anatomi-web-applikation
 
 ## Bakgrund
@@ -23,11 +23,11 @@ Maven
 
 ## Bygga och köra appen
 
-git clone git@github.com:FindOut/anatomi_server.git
+git clone git@github.com:FindOut/anatomy_server.git
 
-cd anatomi_server/
+cd anatomy_server/
 
-cd anatomi_server/
+cd anatomy_server/
 
 mvn jetty:run
 

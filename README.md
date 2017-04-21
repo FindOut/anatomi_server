@@ -17,7 +17,15 @@ Servern kan skrivas i Java enligt JavaEE-standarden.
 
 ## Sätta upp utvecklingsmiljö
 
+Valfri IDE för Java
+Maven
+
 ## Bygga och köra appen
+
+git clone git@github.com:FindOut/anatomi_server.git
+cd anatomi_server/
+cd anatomi_server/
+mvn jetty:run
 
 ## Rest-gränssnitt
 

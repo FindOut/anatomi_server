@@ -37,3 +37,33 @@ mvn jetty:run
 
 ## Rest-gränssnitt
 
+Alla URLer är av typen http://host/anatomy/api/..... 
+Alla REST-anrop returnerar JSON om inte annat anges.
+
+ namn | http-metod | URL | Beskrivning 
+ --- | --- | --- 
+lista modeller | GET | models | returnerar en lista av alla modeller
+en modell | GET | models/*id* | returnerar modellen med angivet id, med all dess anatomer, relationer och attribut
+ta bort modell | DELETE | models/*id* | tar bort modellen med angivet id från servern
+skapa modell | POST | models | skapar en ny tom modell med ett unikt id, som returneras
+skapa anatom i en modell | POST | models/*id*/anatoms | skapa en nya anatom i modell *id*, och returnerar ett unikt auomatgenererat id.
+ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId*
+skapa relation
+ta bort relation
+sätt anatom-attribut | .. | skapa attribut om det ej finns, och sätt dess värde
+ta bort anatom-attribut
+sätt relations-attribut
+ta bort relations-attribut
+
+### lista modeller
+
+[
+  {id: 123},
+  {id: 234},
+  ...
+]
+
+### skapa ny modell
+
+Skapar tom modell och returnerar ett unikt automatgenerat id som respons.
+

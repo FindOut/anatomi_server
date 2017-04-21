@@ -31,5 +31,9 @@ cd anatomi_server/
 
 mvn jetty:run
 
+## Meta-modell
+
+![meta-modell](anatomy_server_model.jpg)
+
 ## Rest-gränssnitt
 

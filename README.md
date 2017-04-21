@@ -41,7 +41,7 @@ Alla URLer är av typen http://host/anatomy/api/.....
 Alla REST-anrop returnerar JSON om inte annat anges.
 
  namn | http-metod | URL | Beskrivning 
- --- | --- | --- 
+ --- | --- | --- | ---
 lista modeller | GET | models | returnerar en lista av alla modeller
 en modell | GET | models/*id* | returnerar modellen med angivet id, med all dess anatomer, relationer och attribut
 ta bort modell | DELETE | models/*id* | tar bort modellen med angivet id från servern

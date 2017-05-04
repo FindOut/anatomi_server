@@ -19,7 +19,7 @@ Servern kan skrivas i Java enligt JavaEE-standarden.
 
 Valfri IDE för Java
 
-Maven
+Maven v3.*
 
 ## Bygga och köra appen
 
@@ -29,7 +29,11 @@ cd anatomy_server/
 
 cd anatomy_server/
 
-mvn jetty:run
+mvn spring-boot:run
+
+För att köra tester fristående:
+
+mvn integration-test
 
 ## Meta-modell
 

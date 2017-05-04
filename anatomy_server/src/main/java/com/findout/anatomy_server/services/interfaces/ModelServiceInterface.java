@@ -11,6 +11,5 @@ public interface ModelServiceInterface {
 	public Model getModelWithId(int id);
 	public Model addModel();
 	public void addModel(Model model);
-	public void deleteAllModels();
 	public void deleteModelWithId(int id);
 }

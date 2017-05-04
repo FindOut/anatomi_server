@@ -31,6 +31,10 @@ public class Anatom {
 		this.relations = relations;
 	}
 
+	public void addRelation(Relation relation) {
+		relations.add(relation);
+	}
+	
 	public int getId() {
 		return id;
 	}

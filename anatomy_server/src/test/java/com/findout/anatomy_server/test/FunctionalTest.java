@@ -13,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
+import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.AnatomyService;
 
 import io.restassured.RestAssured;
@@ -70,7 +72,7 @@ public class FunctionalTest {
 		service.deleteAllModels();
 		service.addModels();
 
-		given().contentType("application/json").when().get(apiBase + "/models/" + 0).then().body(containsString("id"))
+		given().contentType("application/json").when().get(apiBase + "/models/" + 0).then().body("id", equalTo(0))
 				.body(containsString("anatoms"));
 	}
 
@@ -83,7 +85,7 @@ public class FunctionalTest {
 	}
 
 	@Test
-	public void deleteModelWithId() {
+	public void testDeleteModelWithId() {
 		service.deleteAllModels();
 		service.addModels();
 		int sizeBefore = service.getModels().size();
@@ -97,7 +99,7 @@ public class FunctionalTest {
 	}
 
 	@Test
-	public void addEmptyModel() {
+	public void testAddEmptyModel() {
 		service.deleteAllModels();
 		service.addModels();
 		int sizeBefore = service.getModels().size();
@@ -109,7 +111,7 @@ public class FunctionalTest {
 	}
 	
 	@Test
-	public void getAnatomsForModel() {
+	public void testGetAnatomsForModel() {
 		service.deleteAllModels();
 		Model model = service.addModel();
 		int id = model.getId();
@@ -120,7 +122,19 @@ public class FunctionalTest {
 	}
 	
 	@Test
-	public void addAnatomToModel() {
+	public void testGetAnatomWithId() {
+		service.deleteAllModels();
+		Model model = service.addModel();
+		int modelId = model.getId();
+		service.addAnatomsToModel(modelId);
+		int anatomId = 0;
+		
+		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + anatomId).then().
+		body("id",equalTo(0));
+	}
+	
+	@Test
+	public void testAddAnatomToModel() {
 		service.deleteAllModels();
 		Model model = service.addModel();
 		int id = model.getId();
@@ -133,7 +147,7 @@ public class FunctionalTest {
 	}
 	
 	@Test
-	public void deleteAnatomFromModel() {
+	public void testDeleteAnatomFromModel() {
 		service.deleteAllModels();
 		Model model = service.addModel();
 		int modelId = model.getId();
@@ -146,7 +160,35 @@ public class FunctionalTest {
 		given().when().get(apiBase + "/models/" + modelId + "/anatoms/" + anatomId).body().equals(null);
 		
 		given().when().get(apiBase + "/models/" + modelId + "/anatoms").then().assertThat().body("size()", is(sizeBefore - 1));
+	}
+	
+	@Test
+	public void testGetRelationsForAnatom() {
+		service.deleteAllModels();
+		Model model = service.addModel();
+		int modelId = model.getId();
+		Anatom fromAnatom = service.addAnatom(model);
+		Anatom toAnatom = service.addAnatom(model);
+		int fromAnatomId = fromAnatom.getId();
+		int toAnatomId = toAnatom.getId();
+		service.addRelationsToAnatom(fromAnatomId, toAnatomId);
 		
+		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + fromAnatomId + "/relations").then().
+		body(containsString("id")).body(containsString("from")).body(containsString("to"));
+	}
+	
+	@Test
+	public void testGetRelationWithId() {
+		service.deleteAllModels();
+		Model model = service.addModel();
+		int modelId = model.getId();
+		Anatom fromAnatom = service.addAnatom(model);
+		Anatom toAnatom = service.addAnatom(model);
+		int fromAnatomId = fromAnatom.getId();
+		int toAnatomId = toAnatom.getId();
+		Relation relation = service.addRelation(fromAnatom, toAnatom);
 		
+		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + fromAnatomId + "/relations/" + relation.getId()).then().
+		body("id", equalTo(relation.getId())).body("from", equalTo(fromAnatomId)).body("to", equalTo(toAnatomId));
 	}
 }

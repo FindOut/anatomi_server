@@ -11,7 +11,6 @@ public interface AnatomServiceInterface {
 	public Anatom getAnatomWithId(int id);
 	public Anatom addAnatom(Model model);
 	public void addAnatom(Anatom anatom, Model model);
-	public void deleteAllAnatoms();
 	public void deleteAnatomWithId(int id, Model model);
 	public List<Anatom> getAnatomsForModel(Model model);
 }

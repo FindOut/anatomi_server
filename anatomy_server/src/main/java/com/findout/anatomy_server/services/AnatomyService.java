@@ -13,10 +13,12 @@ public class AnatomyService {
 	private static AnatomyService instance;
 	private ModelService modelService;
 	private AnatomService anatomService;
+	private RelationService relationService;
 	
 	private AnatomyService() {
 		this.modelService = new ModelService();
 		this.anatomService = new AnatomService();
+		this.relationService = new RelationService();
 	}
 	
 	public static AnatomyService getInstance() {
@@ -41,7 +43,8 @@ public class AnatomyService {
 	}
 	
 	public List<Relation> getRelationsForAnatom(int id) {
-		return null;
+		Anatom anatom = anatomService.getAnatomWithId(id);
+		return relationService.getRelationsForAnatom(anatom);
 	}
 	
 	public Model getModelWithId(int id) {
@@ -74,8 +77,28 @@ public class AnatomyService {
 		anatomService.addAnatom(anatom, model);
 	}
 	
+	public Anatom getAnatomWithId(int id) {
+		return anatomService.getAnatomWithId(id);
+	}
+	
 	public void deleteAnatomFromModel(int anatomId, int modelId) {
 		Model model = modelService.getModelWithId(modelId);
 		anatomService.deleteAnatomWithId(anatomId, model);
+	}
+	
+	public Relation addRelation(int from, int to) {
+		Anatom fromAnatom = anatomService.getAnatomWithId(from);
+		Anatom toAnatom = anatomService.getAnatomWithId(to);
+		return relationService.addRelation(fromAnatom, toAnatom);
+	}
+	
+	public void addRelation(Relation relation) {
+		Anatom fromAnatom = anatomService.getAnatomWithId(relation.getFrom());
+		Anatom toAnatom = anatomService.getAnatomWithId(relation.getTo());
+		relationService.addRelation(relation, fromAnatom, toAnatom);
+	}
+	
+	public Relation getRelationWithId(int id) {
+		return relationService.getRelationWithId(id);
 	}
 }

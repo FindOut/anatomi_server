@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
+import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.rest.RestService;
 import com.findout.anatomy_server.services.AnatomyService;
+
+import groovy.transform.stc.FromAbstractTypeMethods;
 
 public class TestService {
 
@@ -55,5 +58,28 @@ public class TestService {
 			Anatom anatom = new Anatom(i);
 			service.addAnatom(anatom, id);
 		}
+	}
+	
+	public Anatom addAnatom(Model model) {
+		List<Anatom> anatoms = model.getAnatoms();
+		Anatom anatom = new Anatom(anatoms.size());
+		service.addAnatom(anatom, model.getId());
+		
+		return anatom;
+	}
+	
+	public void addRelationsToAnatom(int from, int to) {
+		for (int i = 0; i < 3; i++) {
+			Relation relation = new Relation(i, from, to);
+			service.addRelation(relation);
+		}
+	}
+	
+	public Relation addRelation(Anatom from, Anatom to) {
+		List<Relation> relations = from.getRelations();
+		Relation relation = new Relation(relations.size(), from.getId(), to.getId());
+		service.addRelation(relation);
+		
+		return relation;
 	}
 }

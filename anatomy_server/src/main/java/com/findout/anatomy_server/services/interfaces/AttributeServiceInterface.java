@@ -10,6 +10,5 @@ public interface AttributeServiceInterface {
 	public Attribute getAttributelWithId(int id);
 	public Attribute addAttribute();
 	public void addAttribute(Attribute attribute);
-	public void deleteAllAttributes();
 	public void deleteAttributeWithId(int id);
 }

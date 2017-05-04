@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
+import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.AnatomyService;
 
 @RestController
@@ -56,8 +57,23 @@ public class RestService {
 		return service.addAnatom(modelId);
 	}
 	
+	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}", method = RequestMethod.GET)
+	public Anatom getAnatomWithId(@PathVariable int modelId, @PathVariable int anatomId) {
+		return service.getAnatomWithId(anatomId);
+	}
+	
 	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}", method = RequestMethod.DELETE)
 	public void deleteAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
 		service.deleteAnatomFromModel(anatomId, modelId);
+	}
+	
+	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/relations", method = RequestMethod.GET)
+	public List<Relation> getRelationsForAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
+		return service.getRelationsForAnatom(anatomId);
+	}
+	
+	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/relations/{relationId}", method = RequestMethod.GET)
+	public Relation getRelationwithId(@PathVariable int modelId, @PathVariable int anatomId, @PathVariable int relationId) {
+		return service.getRelationWithId(relationId);
 	}
 }

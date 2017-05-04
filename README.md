@@ -46,10 +46,10 @@ lista modeller | GET | models | | returnerar en lista av alla modeller
 en modell | GET | models/*id* | | returnerar modellen med angivet id, med alla dess anatomer, relationer och attribut
 ta bort modell | DELETE | models/*id* | | tar bort modellen med angivet id från servern
 skapa modell | POST | models | | skapar en ny tom modell med ett unikt id, som returneras
-skapa anatom i en modell | POST | | models/*id*/anatoms | skapa en nya anatom i modell *id*, som returneras
+skapa anatom i en modell | POST | models/*id*/anatoms | | skapa en nya anatom i modell *id*, som returneras
 hämta alla anatomer från en modell	| GET	|	models/*id*/anatoms | |	returnerar en lista med alla anatomer för modell med angivet id
 hämta en anatom	|	GET	|	models/*modelId*/anatoms/*anatomId* | |	returnerar anatomen med angivet id, med alla dess relationer och attribut
-ta bort anatom | DELETE | | models/*modelId*/anatoms/*anatomId* | | tar bort anatomen med angivet id från servern
+ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId* | | tar bort anatomen med angivet id från servern
 skapa relation |	POST |	models/*modelId*/anatoms/*anatomId*/relations	| {toAnatom : [integer]} |	skapar en relation från anatom *anatomId* till anatom *toAnatom*
 hämta alla relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations	| | returnerar en lista med alla relationer för anatom med angivet id
 hämta en relation	|	GET |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | returnerar relationen med angivet id

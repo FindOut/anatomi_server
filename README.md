@@ -19,7 +19,7 @@ Servern kan skrivas i Java enligt JavaEE-standarden.
 
 Valfri IDE för Java
 
-Maven
+Maven v3.*
 
 ## Bygga och köra appen
 
@@ -29,7 +29,11 @@ cd anatomy_server/
 
 cd anatomy_server/
 
-mvn jetty:run
+mvn spring-boot:run
+
+#### För att köra tester fristående:
+
+mvn integration-test
 
 ## Meta-modell
 
@@ -40,20 +44,25 @@ mvn jetty:run
 Alla URLer är av typen http://host/anatomy/api/..... 
 Alla REST-anrop returnerar JSON om inte annat anges.
 
- namn | http-metod | URL | Beskrivning 
- --- | --- | --- | ---
-lista modeller | GET | models | returnerar en lista av alla modeller
-en modell | GET | models/*id* | returnerar modellen med angivet id, med all dess anatomer, relationer och attribut
-ta bort modell | DELETE | models/*id* | tar bort modellen med angivet id från servern
-skapa modell | POST | models | skapar en ny tom modell med ett unikt id, som returneras
-skapa anatom i en modell | POST | models/*id*/anatoms | skapa en nya anatom i modell *id*, och returnerar ett unikt auomatgenererat id.
-ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId*
-skapa relation
-ta bort relation
-sätt anatom-attribut | .. | skapa attribut om det ej finns, och sätt dess värde
-ta bort anatom-attribut
-sätt relations-attribut
-ta bort relations-attribut
+ namn | http-metod | URL | Body | Beskrivning 
+ --- | --- | --- | --- | ---
+lista modeller | GET | models | | returnerar en lista av alla modeller
+en modell | GET | models/*id* | | returnerar modellen med angivet id, med alla dess anatomer, relationer och attribut
+ta bort modell | DELETE | models/*id* | | tar bort modellen med angivet id från servern
+skapa modell | POST | models | | skapar en ny tom modell med ett unikt id, som returneras
+skapa anatom i en modell | POST | models/*id*/anatoms | | skapa en nya anatom i modell *id*, som returneras
+hämta alla anatomer från en modell	| GET	|	models/*id*/anatoms | |	returnerar en lista med alla anatomer för modell med angivet id
+hämta en anatom	|	GET	|	models/*modelId*/anatoms/*anatomId* | |	returnerar anatomen med angivet id, med alla dess relationer och attribut
+ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId* | | tar bort anatomen med angivet id från servern
+skapa relation |	POST |	models/*modelId*/anatoms/*anatomId*/relations	| {toAnatom : [integer]} |	skapar en relation från anatom *anatomId* till anatom *toAnatom*
+hämta alla relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations	| | returnerar en lista med alla relationer för anatom med angivet id
+hämta en relation	|	GET |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | returnerar relationen med angivet id
+ta bort relation	|	DELETE |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | tar bort relationen med angivet id från servern
+sätt anatom-attribut |	POST |	models/*modelId*/anatoms/*anatomId*/attributes |	{value : [integer]}	| skapar attribut om det ej finns, och sätter dess värde	
+ta bort anatom-attribut	|	DELETE |	models/*modelId*/anatoms/*anatomId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
+sätt relations-attribut	|	POST |	models/*modelId*/anatoms/*anatomId*/relations/*relationId*/attributes |	{value : [integer]} |	skapar attribut om det ej finns, och sätter dess värde		
+ta bort relations-attribut |	DELETE |	models/*modelId*/anatoms/*anatomId*/relations/*relationId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
+
 
 ### lista modeller
 

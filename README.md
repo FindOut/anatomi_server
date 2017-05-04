@@ -31,7 +31,7 @@ cd anatomy_server/
 
 mvn spring-boot:run
 
-För att köra tester fristående:
+#### För att köra tester fristående:
 
 mvn integration-test
 

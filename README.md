@@ -53,7 +53,7 @@ ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId* | | tar bort anato
 skapa relation |	POST |	models/*modelId*/anatoms/*anatomId*/relations	| {toAnatom : [integer]} |	skapar en relation från anatom *anatomId* till anatom *toAnatom*
 hämta alla relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations	| | returnerar en lista med alla relationer för anatom med angivet id
 hämta en relation	|	GET |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | returnerar relationen med angivet id
-ta bort relation	|	DELETE	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | tar bort relationen med angivet id från servern
+ta bort relation	|	DELETE |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | tar bort relationen med angivet id från servern
 sätt anatom-attribut |	POST |	models/*modelId*/anatoms/*anatomId*/attributes |	{value : [integer]}	| skapar attribut om det ej finns, och sätter dess värde	
 ta bort anatom-attribut	|	DELETE |	models/*modelId*/anatoms/*anatomId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
 sätt relations-attribut	|	POST |	models/*modelId*/anatoms/*anatomId*/relations/*relationId*/attributes |	{value : [integer]} |	skapar attribut om det ej finns, och sätter dess värde		

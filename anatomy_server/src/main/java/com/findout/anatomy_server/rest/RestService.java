@@ -2,25 +2,22 @@ package com.findout.anatomy_server.rest;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
-import com.findout.anatomy_server.services.AnatomyService;
+import com.findout.anatomy_server.services.interfaces.AnatomyService;
 
 @RestController
 public class RestService {
 
+	@Autowired
 	public AnatomyService service;
-	
-	public RestService() {
-		this.service = AnatomyService.getInstance();
-	}
 	
 	@RequestMapping("/")
 	public String home() {

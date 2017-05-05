@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
-import com.findout.anatomy_server.services.AnatomyService;
+import com.findout.anatomy_server.services.memory.InMemoryService;
 
 import io.restassured.RestAssured;
 
@@ -24,8 +24,8 @@ import io.restassured.RestAssured;
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class FunctionalTest {
 
-	private final String apiBase = "http://localhost:8080/anatomy/api";
-	private TestService service;
+	private InMemoryService service;
+	private TestHelper helper;
 
 	@BeforeClass
 	public static void setup() {
@@ -51,144 +51,133 @@ public class FunctionalTest {
 	}
 
 	public FunctionalTest() {
-		this.service = new TestService();
+		this.service = InMemoryService.getInstance();
+		this.helper = new TestHelper();
 	}
 
 	@Test
 	public void testSite() {
-		get(apiBase).then().assertThat().statusCode(200);
+		get("/").then().assertThat().statusCode(200);
 	}
 
 	@Test
 	public void testGetModels() {
-		service.deleteAllModels();
-		service.addModels();
+		helper.deleteAllData();
+		helper.addModels();
 
-		given().contentType("application/json").when().get(apiBase + "/models").then().body(containsString("id"));
+		given().contentType("application/json").when().get("/models").then().body(containsString("id"));
 	}
 
 	@Test
 	public void testGetModelWithId() {
-		service.deleteAllModels();
-		service.addModels();
+		helper.deleteAllData();
+		helper.addModels();
 
-		given().contentType("application/json").when().get(apiBase + "/models/" + 0).then().body("id", equalTo(0))
+		given().contentType("application/json").when().get("/models/" + 0).then().body("id", equalTo(0))
 				.body(containsString("anatoms"));
 	}
 
 	@Test
 	public void testInvalidModel() {
-		service.deleteAllModels();
-		service.addModels();
+		helper.deleteAllData();
+		helper.addModels();
 
-		given().when().get(apiBase + "/models/" + 16).body().equals(null);
+		given().when().get("/models/" + 16).body().equals(null);
 	}
 
 	@Test
 	public void testDeleteModelWithId() {
-		service.deleteAllModels();
-		service.addModels();
+		helper.deleteAllData();
+		helper.addModels();
 		int sizeBefore = service.getModels().size();
 		int id = 0;
 
-		given().when().delete(apiBase + "/models/" + id).then().statusCode(200);
+		given().when().delete("/models/" + id).then().statusCode(200);
 
-		given().when().get(apiBase + "/models/" + id).body().equals(null);
+		given().when().get("/models/" + id).body().equals(null);
 
-		given().when().get(apiBase + "/models").then().assertThat().body("size()", is(sizeBefore - 1));
+		given().when().get("/models").then().assertThat().body("size()", is(sizeBefore - 1));
 	}
 
 	@Test
 	public void testAddEmptyModel() {
-		service.deleteAllModels();
-		service.addModels();
+		helper.deleteAllData();
+		helper.addModels();
 		int sizeBefore = service.getModels().size();
 
-		given().contentType("application/json").when().post(apiBase + "/models").then().body(containsString("id"))
+		given().contentType("application/json").when().post("/models").then().body(containsString("id"))
 				.body(containsString("anatoms"));
 
-		given().when().get(apiBase + "/models").then().assertThat().body("size()", is(sizeBefore + 1));
+		given().when().get("/models").then().assertThat().body("size()", is(sizeBefore + 1));
 	}
 	
 	@Test
 	public void testGetAnatomsForModel() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int id = model.getId();
-		service.addAnatomsToModel(id);
+		helper.deleteAllData();
+		helper.fillData();
+		int id = 0;
 		
-		given().contentType("application/json").when().get(apiBase + "/models/" + id + "/anatoms").then().
+		given().contentType("application/json").when().get("/models/" + id + "/anatoms").then().
 		body(containsString("id")).body(containsString("attributes")).body(containsString("relations"));
 	}
 	
 	@Test
 	public void testGetAnatomWithId() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int modelId = model.getId();
-		service.addAnatomsToModel(modelId);
-		int anatomId = 0;
+		helper.deleteAllData();
+		helper.fillData();
+		int id = 0;
 		
-		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + anatomId).then().
+		given().contentType("application/json").when().get("/models/" + id + "/anatoms/" + id).then().
 		body("id",equalTo(0));
 	}
 	
 	@Test
 	public void testAddAnatomToModel() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int id = model.getId();
+		helper.deleteAllData();
+		helper.fillData();
+		int id = 0;
 		int sizeBefore = service.getAnatomsForModel(id).size();
 		
-		given().contentType("application/json").when().post(apiBase + "/models/" + id + "/anatoms").then().
+		given().contentType("application/json").when().post("/models/" + id + "/anatoms").then().
 		body(containsString("id")).body(containsString("attributes")).body(containsString("relations"));
 		
-		given().when().get(apiBase + "/models/" + id + "/anatoms").then().assertThat().body("size()", is(sizeBefore + 1));
+		given().when().get("/models/" + id + "/anatoms").then().assertThat().body("size()", is(sizeBefore + 1));
 	}
 	
 	@Test
 	public void testDeleteAnatomFromModel() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int modelId = model.getId();
-		service.addAnatomsToModel(modelId);
-		int anatomId = 0;
-		int sizeBefore = service.getAnatomsForModel(modelId).size();
+		helper.deleteAllData();
+		helper.fillData();
+		int id = 0;
+		int sizeBefore = service.getAnatomsForModel(id).size();
 		
-		given().when().delete(apiBase + "/models/" + modelId + "/anatoms/" + anatomId).then().statusCode(200);
+		given().when().delete("/models/" + id + "/anatoms/" + id).then().statusCode(200);
 
-		given().when().get(apiBase + "/models/" + modelId + "/anatoms/" + anatomId).body().equals(null);
+		given().when().get("/models/" + id + "/anatoms/" + id).body().equals(null);
 		
-		given().when().get(apiBase + "/models/" + modelId + "/anatoms").then().assertThat().body("size()", is(sizeBefore - 1));
+		given().when().get("/models/" + id + "/anatoms").then().assertThat().body("size()", is(sizeBefore - 1));
 	}
 	
 	@Test
 	public void testGetRelationsForAnatom() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int modelId = model.getId();
-		Anatom fromAnatom = service.addAnatom(model);
-		Anatom toAnatom = service.addAnatom(model);
-		int fromAnatomId = fromAnatom.getId();
-		int toAnatomId = toAnatom.getId();
-		service.addRelationsToAnatom(fromAnatomId, toAnatomId);
+		helper.deleteAllData();
+		helper.fillData();
+		int id = 0;
 		
-		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + fromAnatomId + "/relations").then().
+		given().contentType("application/json").when().get("/models/" + id + "/anatoms/" + id + "/relations").then().
 		body(containsString("id")).body(containsString("from")).body(containsString("to"));
 	}
 	
 	@Test
 	public void testGetRelationWithId() {
-		service.deleteAllModels();
-		Model model = service.addModel();
-		int modelId = model.getId();
-		Anatom fromAnatom = service.addAnatom(model);
-		Anatom toAnatom = service.addAnatom(model);
-		int fromAnatomId = fromAnatom.getId();
-		int toAnatomId = toAnatom.getId();
-		Relation relation = service.addRelation(fromAnatom, toAnatom);
+		helper.deleteAllData();
+		helper.fillData();
+		int modelId = 0;
+		Relation relation = service.getRelationWithId(0);
+		int fromAnatomId = relation.getFrom();
+		int toAnatomId = relation.getTo();
 		
-		given().contentType("application/json").when().get(apiBase + "/models/" + modelId + "/anatoms/" + fromAnatomId + "/relations/" + relation.getId()).then().
+		given().contentType("application/json").when().get("/models/" + modelId + "/anatoms/" + fromAnatomId + "/relations/" + relation.getId()).then().
 		body("id", equalTo(relation.getId())).body("from", equalTo(fromAnatomId)).body("to", equalTo(toAnatomId));
 	}
 }

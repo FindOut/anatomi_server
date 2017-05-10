@@ -14,6 +14,10 @@ public class Attribute {
 		this.id = id;
 		this.value = value;
 	}
+	
+	public Attribute() {
+		this.value = 0;
+	}
 
 	public int getValue() {
 		return value;

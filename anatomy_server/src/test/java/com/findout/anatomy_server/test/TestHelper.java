@@ -19,6 +19,7 @@ public class TestHelper {
 		addModels();
 		addAnatoms();
 		addRelations();
+		addAttributes();
 	}
 
 	public void deleteAllData() {
@@ -47,16 +48,17 @@ public class TestHelper {
 			service.addRelation(m.getAnatoms().get(0).getId(), m.getAnatoms().get(1).getId());
 		}
 	}
-
-	public void addAnatomsToModel(int id) {
-		for (int i = 0; i < 3; i++) {
-			service.addAnatom(id);
+	
+	public void addAttributes() {
+		for (Anatom a : service.getAnatoms()) {
+			for (int i = 0; i < 3; i++) {
+				service.addAttributeToAnatom(a.getId(), i);
+			}
 		}
-	}
-
-	public void addRelationsToAnatom(int from, int to) {
-		for (int i = 0; i < 3; i++) {
-			service.addRelation(from, to);
+		for (Relation r : service.getRelations()) {
+			for (int i = 0; i < 3; i++) {
+				service.addAttributeToRelation(r.getId(), i);
+			}
 		}
 	}
 }

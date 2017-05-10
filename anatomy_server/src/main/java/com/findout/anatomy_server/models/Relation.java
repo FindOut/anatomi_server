@@ -10,6 +10,10 @@ public class Relation {
 	private int to;
 	private List<Attribute> attributes;
 	
+	public Relation() {
+		this.attributes = new ArrayList<Attribute>();
+	}
+	
 	public Relation(int id) {
 		this.id = id;
 		this.attributes = new ArrayList<Attribute>();

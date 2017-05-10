@@ -54,25 +54,16 @@ skapa anatom i en modell | POST | models/*id*/anatoms | | skapa en nya anatom i 
 hämta alla anatomer från en modell	| GET	|	models/*id*/anatoms | |	returnerar en lista med alla anatomer för modell med angivet id
 hämta en anatom	|	GET	|	models/*modelId*/anatoms/*anatomId* | |	returnerar anatomen med angivet id, med alla dess relationer och attribut
 ta bort anatom | DELETE | models/*modelId*/anatoms/*anatomId* | | tar bort anatomen med angivet id från servern
-skapa relation |	POST |	models/*modelId*/anatoms/*anatomId*/relations	| {toAnatom : [integer]} |	skapar en relation från anatom *anatomId* till anatom *toAnatom*
+skapa relation |	POST |	relations	| {from : [integer], to : [integer]} |	skapar en relation från anatom *anatomId* till anatom *toAnatom*
 hämta alla relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations	| | returnerar en lista med alla relationer för anatom med angivet id
-hämta en relation	|	GET |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | returnerar relationen med angivet id
-ta bort relation	|	DELETE |	models/*modelId*/anatoms/*anatomId*/relations/*relationId* | | tar bort relationen med angivet id från servern
-sätt anatom-attribut |	POST |	models/*modelId*/anatoms/*anatomId*/attributes |	{value : [integer]}	| skapar attribut om det ej finns, och sätter dess värde	
-ta bort anatom-attribut	|	DELETE |	models/*modelId*/anatoms/*anatomId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
-sätt relations-attribut	|	POST |	models/*modelId*/anatoms/*anatomId*/relations/*relationId*/attributes |	{value : [integer]} |	skapar attribut om det ej finns, och sätter dess värde		
-ta bort relations-attribut |	DELETE |	models/*modelId*/anatoms/*anatomId*/relations/*relationId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
+hämta alla utgående relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations/outbound	| | returnerar en lista med alla utgående relationer för anatom med angivet id
+hämta alla ingående relationer från en anatom |	GET |	models/*modelId*/anatoms/*anatomId*/relations/inbound	| | returnerar en lista med alla ingående relationer för anatom med angivet id
+hämta en relation	|	GET |	relations/*relationId* | | returnerar relationen med angivet id
+ta bort relation	|	DELETE |	relations/*relationId* | | tar bort relationen med angivet id från servern
+sätt anatom-attribut |	POST |	models/*modelId*/anatoms/*anatomId*/attributes |	{value : [integer]}	| skapar attribut, sätter dess värde, och returnerar attributet
+ändra anatom-attribut	|	PUT |	attributes/*attributeId* | {value : [integer]} |	ändrar värdet på attributet med angivet id
+ta bort anatom-attribut	|	DELETE |	attributes/*attributeId* | |	tar bort attributet med angivet id från servern
+sätt relations-attribut	|	POST |	relations/*relationId*/attributes |	{value : [integer]} |	skapar attribut, sätter dess värde, och returnerar attributet		
+ta bort relations-attribut |	DELETE |	relations/*relationId*/attributes/*attributeId* | |	tar bort attributet med angivet id från servern
 
-
-### lista modeller
-
-[
-  {id: 123},
-  {id: 234},
-  ...
-]
-
-### skapa ny modell
-
-Skapar tom modell och returnerar ett unikt automatgenerat id som respons.
 

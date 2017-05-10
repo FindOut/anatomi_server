@@ -23,102 +23,102 @@ public class RestService {
 	@Autowired
 	public AnatomyService service;
 	
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String home() {
 		return "This is an api for accessing data from anatomy_server.";
 	}
 	
-	@RequestMapping(value = "/models", method = RequestMethod.GET)
+	@RequestMapping(value = "models", method = RequestMethod.GET)
 	public List<Model> getModels() {
         return service.getModels();
     }
 	
-	@RequestMapping(value = "/models", method = RequestMethod.POST)
+	@RequestMapping(value = "models", method = RequestMethod.POST)
 	public Model addModel() {
 		return service.addModel();
     }
 	
-	@RequestMapping(value = "/models/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{id}", method = RequestMethod.GET)
 	public Model getModel(@PathVariable int id) {
 		return service.getModelWithId(id);
     }
 	
-	@RequestMapping(value = "/models/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "models/{id}", method = RequestMethod.DELETE)
 	public void deleteModel(@PathVariable int id) {
 		service.deleteModelWithId(id);
     }
 	
-	@RequestMapping(value = "/models/{id}/anatoms", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{id}/anatoms", method = RequestMethod.GET)
 	public List<Anatom> getAnatomsForModel(@PathVariable int id) {
 		return service.getAnatomsForModel(id);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms", method = RequestMethod.POST)
+	@RequestMapping(value = "models/{modelId}/anatoms", method = RequestMethod.POST)
 	public Anatom addAnatomToModel(@PathVariable int modelId) {
 		return service.addAnatom(modelId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}", method = RequestMethod.GET)
 	public Anatom getAnatomWithId(@PathVariable int modelId, @PathVariable int anatomId) {
 		return service.getAnatomWithId(anatomId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}", method = RequestMethod.DELETE)
 	public void deleteAnatomFromModel(@PathVariable int modelId, @PathVariable int anatomId) {
 		service.deleteAnatomFromModel(anatomId, modelId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/relations", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}/relations", method = RequestMethod.GET)
 	public List<Relation> getRelationsForAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
 		return service.getRelationsForAnatom(anatomId);
 	}
 	
-	@RequestMapping(value = "/relations", method = RequestMethod.POST)
+	@RequestMapping(value = "relations", method = RequestMethod.POST)
 	public Relation addRelation(@RequestBody Relation relation) {
 		return service.addRelation(relation.getFrom(), relation.getTo());
 	}
 	
-	@RequestMapping(value = "/relations/{relationId}", method = RequestMethod.GET)
+	@RequestMapping(value = "relations/{relationId}", method = RequestMethod.GET)
 	public Relation getRelationwithId(@PathVariable int relationId) {
 		return service.getRelationWithId(relationId);
 	}
 	
-	@RequestMapping(value = "/relations/{relationId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "relations/{relationId}", method = RequestMethod.DELETE)
 	public void deleteRelationWithId(@PathVariable int relationId) {
 		service.deleteRelationWithId(relationId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/attributes", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}/attributes", method = RequestMethod.GET)
 	public List<Attribute> getAttributesForAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
 		return service.getAttributesForAnatom(anatomId);
 	}
 	
-	@RequestMapping(value = "/relations/{relationId}/attributes", method = RequestMethod.GET)
+	@RequestMapping(value = "relations/{relationId}/attributes", method = RequestMethod.GET)
 	public List<Attribute> getAttributesForRelation(@PathVariable int relationId) {
 		return service.getAttributesForRelation(relationId);
 	}
 	
-	@RequestMapping(value = "/attributes/{attributeId}", method = RequestMethod.GET)
+	@RequestMapping(value = "attributes/{attributeId}", method = RequestMethod.GET)
 	public Attribute getAttributeWithId(@PathVariable int attributeId) {
 		return service.getAttributeWithId(attributeId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/attributes", method = RequestMethod.POST)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}/attributes", method = RequestMethod.POST)
 	public Attribute addAttributeToAnatom(@PathVariable int modelId, @PathVariable int anatomId, @RequestBody Attribute attribute) {
 		return service.addAttributeToAnatom(anatomId, attribute.getValue());
 	}
 	
-	@RequestMapping(value = "/relations/{relationId}/attributes", method = RequestMethod.POST)
+	@RequestMapping(value = "relations/{relationId}/attributes", method = RequestMethod.POST)
 	public Attribute addAttributeToRelation(@PathVariable int relationId, @RequestBody Attribute attribute) {
 		return service.addAttributeToRelation(relationId, attribute.getValue());
 	}
 	
-	@RequestMapping(value = "/attributes/{attributeId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "attributes/{attributeId}", method = RequestMethod.PUT)
 	public Attribute changeValueInAttribute(@PathVariable int attributeId, @RequestBody Attribute attribute) {
 		return service.changeValueInAttribute(attributeId, attribute.getValue());
 	}
 	
-	@RequestMapping(value = "/relations/{relationId}/attributes/{attributeId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "relations/{relationId}/attributes/{attributeId}", method = RequestMethod.DELETE)
 	public void deleteAttributeFromRelation(@PathVariable int relationId, @PathVariable int attributeId) {
 		service.deleteAttributeFromRelation(relationId, attributeId);
 	}
@@ -128,12 +128,12 @@ public class RestService {
 		service.deleteAttributeFromAnatom(anatomId, attributeId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/relations/outbound", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}/relations/outbound", method = RequestMethod.GET)
 	public List<Relation> getRelationsFromAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
 		return service.getRelationsFromAnatom(anatomId);
 	}
 	
-	@RequestMapping(value = "/models/{modelId}/anatoms/{anatomId}/relations/inbound", method = RequestMethod.GET)
+	@RequestMapping(value = "models/{modelId}/anatoms/{anatomId}/relations/inbound", method = RequestMethod.GET)
 	public List<Relation> getRelationsToAnatom(@PathVariable int modelId, @PathVariable int anatomId) {
 		return service.getRelationsToAnatom(anatomId);
 	}

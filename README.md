@@ -33,6 +33,14 @@ mvn spring-boot:run
 
 #### För att köra tester fristående:
 
+### Redigera application.properties
+
+Öppna filen ../anatomy_server/src/main/resources/application.properties
+
+och ändra service.type=db till service.type=memory
+
+### Maven-kommando från ../anatomy_server/
+
 mvn integration-test
 
 ## Meta-modell

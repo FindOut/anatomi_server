@@ -23,6 +23,16 @@ Maven v3.*
 
 ## Bygga och köra appen
 
+### Skapa relationsdatabas
+
+Projektet förutsätter att en MySQL-databas vid namn anatomy_server redan finns.
+
+Importera filen ../anatomy_server/sql/anatomy_server_ddl.sql till MySQL.
+
+Ifall port, namn, användarnamn eller liknande behöver ändras så görs detta i filen ../anatomy_server/src/main/resources/application.properties.
+
+### Klona från GitHub och köra projektet
+
 git clone git@github.com:FindOut/anatomy_server.git
 
 cd anatomy_server/

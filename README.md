@@ -59,7 +59,7 @@ mvn integration-test
 
 ## Klass-diagram
 
-![klass-diagram](anatomy_server_classes.svg)
+![klass-diagram](anatomy_server_classes.png)
 
 ## Rest-gränssnitt
 

@@ -13,9 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+/**
+ * Entity representing an anatom in the database
+ * @author Maria Färdig
+ *
+ */
 @Entity
 @Table(name = "anatom")
 public class AnatomEntity {
@@ -35,7 +41,7 @@ public class AnatomEntity {
 	@OneToMany(mappedBy = "fromAnatom", cascade = CascadeType.ALL)
 	private List<RelationEntity> outboundRelations;
 
-	@ManyToMany(mappedBy = "toAnatom", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "toAnatom", cascade = CascadeType.ALL)
 	private List<RelationEntity> inboundRelations;
 
 	@Transient

@@ -8,6 +8,11 @@ import com.findout.anatomy_server.entities.AnatomEntity;
 import com.findout.anatomy_server.entities.AttributeEntity;
 import com.findout.anatomy_server.entities.RelationEntity;
 
+/**
+ * Repository interface for CRUD operations on AttributeEntity objects.
+ * @author Maria Färdig
+ *
+ */
 public interface AttributeRepository extends JpaRepository<AttributeEntity, Integer> {
 
 	public List<AttributeEntity> findByAnatom(AnatomEntity anatom);

@@ -3,6 +3,11 @@ package com.findout.anatomy_server.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple java object representing a model in a diagram.
+ * @author Maria Färdig
+ *
+ */
 public class Model {
 
 	private int id;

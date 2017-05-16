@@ -15,8 +15,11 @@ import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.interfaces.AnatomyService;
 
-
-
+/**
+ * Class for controlling all REST resources.
+ * @author Maria Färdig
+ *
+ */
 @RestController
 public class RestService {
 

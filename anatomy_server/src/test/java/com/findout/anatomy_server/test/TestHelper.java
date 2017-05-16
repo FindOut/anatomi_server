@@ -1,12 +1,15 @@
 package com.findout.anatomy_server.test;
 
-import java.util.List;
-
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.memory.InMemoryService;
 
+/**
+ * Helper class for creating objects used in tests
+ * @author Maria Färdig
+ *
+ */
 public class TestHelper {
 
 	private InMemoryService service;

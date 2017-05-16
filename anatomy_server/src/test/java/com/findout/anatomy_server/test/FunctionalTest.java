@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.findout.anatomy_server.models.Anatom;
@@ -26,8 +27,14 @@ import com.findout.anatomy_server.services.memory.InMemoryService;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 
+/**
+ * Integration tests
+ * @author Maria Färdig
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@TestPropertySource(locations = "classpath:test.properties")
 public class FunctionalTest {
 
 	private InMemoryService service;

@@ -1,5 +1,10 @@
 package com.findout.anatomy_server.models;
 
+/**
+ * Simple java object representing an attribute in a diagram.
+ * @author Maria Färdig
+ *
+ */
 public class Attribute {
 
 	private int id;

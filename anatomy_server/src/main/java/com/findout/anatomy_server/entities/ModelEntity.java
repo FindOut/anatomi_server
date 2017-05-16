@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entity representing a model in the database
+ * @author Maria Färdig
+ *
+ */
 @Entity
 @Table(name = "model")
 public class ModelEntity {

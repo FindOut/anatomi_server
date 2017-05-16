@@ -3,6 +3,11 @@ package com.findout.anatomy_server.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple java object representing an anatom in a diagram.
+ * @author Maria Färdig
+ *
+ */
 public class Anatom {
 
 	private int id;

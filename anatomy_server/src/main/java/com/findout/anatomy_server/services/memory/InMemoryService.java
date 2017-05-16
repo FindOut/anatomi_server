@@ -9,6 +9,11 @@ import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.interfaces.AnatomyService;
 
+/**
+ * Implementation of AnatomyService, for storage only in memory (for testing or other purposes).
+ * @author Maria Färdig
+ *
+ */
 public class InMemoryService implements AnatomyService {
 
 	private static InMemoryService instance;

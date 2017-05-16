@@ -12,6 +12,11 @@ import com.findout.anatomy_server.models.Attribute;
 import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
 
+/**
+ * Helper class for converting to simple java objects from the JPA entity objects.
+ * @author Maria Färdig
+ *
+ */
 public class Converter {
 
 	public List<Model> convertModels(List<ModelEntity> entities) {

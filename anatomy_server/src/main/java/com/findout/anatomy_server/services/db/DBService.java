@@ -19,6 +19,11 @@ import com.findout.anatomy_server.repositories.ModelRepository;
 import com.findout.anatomy_server.repositories.RelationRepository;
 import com.findout.anatomy_server.services.interfaces.AnatomyService;
 
+/**
+ * Implementation of AnatomyService, for storage in relational database.
+ * @author Maria Färdig
+ *
+ */
 public class DBService implements AnatomyService {
 
 	@Autowired

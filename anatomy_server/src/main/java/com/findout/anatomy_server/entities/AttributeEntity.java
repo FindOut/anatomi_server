@@ -9,6 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Entity representing an attribute in the database
+ * @author Maria Färdig
+ *
+ */
 @Entity
 @Table(name = "attribute")
 public class AttributeEntity {

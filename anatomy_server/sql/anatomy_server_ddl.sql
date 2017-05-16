@@ -1,6 +1,6 @@
 -- DROP DATABASE anatomy_server;
-CREATE DATABASE IF NOT EXISTS anatomy_server;
-USE anatomy_server;
+--CREATE DATABASE IF NOT EXISTS anatomy_server;
+--USE anatomy_server;
 
 CREATE TABLE IF NOT EXISTS model (
   model_id INT NOT NULL AUTO_INCREMENT,

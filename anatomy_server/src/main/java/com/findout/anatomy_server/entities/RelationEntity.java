@@ -13,6 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entity representing a relation in the database
+ * @author Maria Färdig
+ *
+ */
 @Entity
 @Table(name = "relation")
 public class RelationEntity {

@@ -1,10 +1,8 @@
 package com.findout.anatomy_server.test;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.findout.anatomy_server.models.Anatom;
 import com.findout.anatomy_server.models.Attribute;
-import com.findout.anatomy_server.models.Model;
 import com.findout.anatomy_server.models.Relation;
 import com.findout.anatomy_server.services.memory.InMemoryService;
 

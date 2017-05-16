@@ -57,6 +57,10 @@ mvn integration-test
 
 ![meta-modell](anatomy_server_model.jpg)
 
+## Klass-diagram
+
+![klass-diagram](anatomy_server_classes.png)
+
 ## Rest-gränssnitt
 
 Alla URLer är av typen http://host/anatomy/api/..... 

@@ -29,6 +29,7 @@ Det går i nuläget att lagra data på två olika sätt, i minnet (mestadels tä
 ## Rest-gränssnitt
 
 Alla URLer är av typen http://host/anatomy/api/...
+
 Alla REST-anrop returnerar JSON om inte annat anges.
 
  namn | http-metod | URL | Body | Beskrivning 

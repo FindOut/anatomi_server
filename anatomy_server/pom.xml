@@ -128,7 +128,7 @@
 		<profile>
 			<id>war</id>
 			<properties>
-				<packaging.type>war</packaging.type>
+				<project.packaging>war</project.packaging>
 			</properties>
 			<dependencies>
 				<dependency>
